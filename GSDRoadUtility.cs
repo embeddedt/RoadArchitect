@@ -1520,13 +1520,13 @@ namespace GSD.Roads{
 			//Cleanups:
 			foreach(GSDRoadIntersection GSDRI in tGSDRIs){
 				GSDIntersectionObjects.CleanupIntersectionObjects(GSDRI.transform.gameObject);
-				if(GSDRI.iStopType == GSDRoadIntersection.iStopTypeEnum.StopSign_AllWay){
+				if(GSDRI.iDefaultIntersectionType == GSDRoadIntersection.iIntersectionTypeEnum.StopSign_AllWay){
 					GSDIntersectionObjects.CreateStopSignsAllWay(GSDRI.transform.gameObject,true);
-				}else if(GSDRI.iStopType == GSDRoadIntersection.iStopTypeEnum.TrafficLight1){
+				}else if(GSDRI.iDefaultIntersectionType == GSDRoadIntersection.iIntersectionTypeEnum.TrafficLight1){
 					GSDIntersectionObjects.CreateTrafficLightBases(GSDRI.transform.gameObject,true);
-				}else if(GSDRI.iStopType == GSDRoadIntersection.iStopTypeEnum.TrafficLight2){
+				}else if(GSDRI.iDefaultIntersectionType == GSDRoadIntersection.iIntersectionTypeEnum.TrafficLight2){
 					
-				}else if(GSDRI.iStopType == GSDRoadIntersection.iStopTypeEnum.None){
+				}else if(GSDRI.iDefaultIntersectionType == GSDRoadIntersection.iIntersectionTypeEnum.None){
 					//Do nothing.
 				}
 			}
@@ -1919,7 +1919,6 @@ namespace GSD.Roads{
 					vMesh.RecalculateNormals();
 					RoadConnections_normals[i] = vMesh.normals;
 					vMesh.tangents = GSDRootUtil.ProcessTangents(vMesh.triangles,vMesh.normals,vMesh.uv,vMesh.vertices);
-					
 					tObj = new GameObject("RoadConnectionBase");
 					MF = tObj.AddComponent<MeshFilter>();
 					MR = tObj.AddComponent<MeshRenderer>();
@@ -1936,7 +1935,6 @@ namespace GSD.Roads{
 			if(bInterseOn){
 				MeshSetup2_Intersections();
 			}
-            
 			if(tRoad.MeshiLanes != null){ Object.DestroyImmediate(tRoad.MeshiLanes); }
 			if(tRoad.MeshiLanes0 != null){ Object.DestroyImmediate(tRoad.MeshiLanes0); }
 			if(tRoad.MeshiLanes1 != null){ Object.DestroyImmediate(tRoad.MeshiLanes1); }
@@ -2478,11 +2476,10 @@ namespace GSD.Roads{
 				if(!UniqueGSDRI.Contains(KVP.Key)){ UniqueGSDRI.Add(KVP.Key); }
 				MeshSetup2_CombineIntersections(KVP,KVP.Key.transform.name + "-" +"LaneDA1");
 			}
-
-            foreach (GSDRoadIntersection GSDRI in UniqueGSDRI){
+			
+			foreach (GSDRoadIntersection GSDRI in UniqueGSDRI){
 				GSDRI.UpdateMaterials();
-            }
-            
+			}
 		}
 		
 		private void MeshSetup2_CombineIntersections(KeyValuePair<GSDRoadIntersection, List<MeshFilter>> KVP, string tName, bool bMainPlates = false){
@@ -2546,7 +2543,7 @@ namespace GSD.Roads{
 			}
 			MF.sharedMesh.vertices = tVerts;
             tObj.transform.localPosition = new Vector3(0f, 0f, 0f);
-            MF.sharedMesh.RecalculateBounds();
+			MF.sharedMesh.RecalculateBounds();
 			MF.sharedMesh.RecalculateNormals();
 			MF.sharedMesh.tangents = GSDRootUtil.ProcessTangents(MF.sharedMesh.triangles,MF.sharedMesh.normals,MF.sharedMesh.uv,MF.sharedMesh.vertices);
             if (tRoad.opt_bIsLightmapped) {
