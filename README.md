@@ -6,12 +6,10 @@
 
 Road Architect for Unity. Road architect is a professional quality road system creator featuring dynamic intersections, bridges and many other road objects.
 
-Road Architect is currently being developed with Unity 2018.3.8f1. If interested in contributing please open an issue or pull request.
+Road Architect is currently being developed with Unity 2019.1.12f1. If interested in contributing please open an issue or pull request.
 
-- Currently, I recommend downloading the main git repository by either using `git clone https://github.com/FritzsHero/RoadArchitect.git` or using Embeddedt's Repo: `git clone https://github.com/embeddedt/RoadArchitect.git`  downloading a ZIP from GitHub.
+- Currently, I recommend downloading the main git repository by using `git clone https://github.com/embeddedt/RoadArchitect.git`  instead of downloading a ZIP from GitHub.
 - The resulting folder should be copied to the root of your Assets directory and may need to be renamed to RoadArchitect (instead of RoadArchitect-master).
-- A preview for upcoming versions should be availible under downloads
-- https://github.com/FritzsHero/RoadArchitect/releases
 - Documentation https://github.com/embeddedt/RoadArchitect/wiki/Documentation
    - Note: The Road Architect menu is located under the "Window" menu.
 
