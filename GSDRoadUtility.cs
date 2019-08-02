@@ -5987,13 +5987,13 @@ namespace GSD.Roads
             }
 
             BoxCollider BC = tObj.AddComponent<BoxCollider>();
-            float MaxHeight = MF.sharedMesh.vertices[447].z;
+            float MaxHeight = MF.sharedMesh.bounds.extents.z * 2;
             BC.size = new Vector3(0.35f, 0.35f, MaxHeight);
             BC.center = new Vector3(0f, 0f, (MaxHeight / 2f));
 
             if (bOptionalCollider)
             {
-                float MaxWidth = MF.sharedMesh.vertices[497].y;
+                float MaxWidth = MF.sharedMesh.bounds.extents.y;
                 GameObject tObjCollider = new GameObject("col2");
                 BC = tObjCollider.AddComponent<BoxCollider>();
                 BC.size = new Vector3(0.175f, MaxWidth, 0.175f);
@@ -6200,6 +6200,7 @@ namespace GSD.Roads
             int Lanes = tSpline.tRoad.opt_Lanes;
             int LanesHalf = Lanes / 2;
             float LanesForInter = -1;
+            bool tallerPole = true;
             if (GSDRI.rType == GSDRoadIntersection.RoadTypeEnum.BothTurnLanes)
             {
                 LanesForInter = LanesHalf + 1f;
@@ -6210,6 +6211,7 @@ namespace GSD.Roads
             }
             else
             {
+                tallerPole = false;
                 LanesForInter = LanesHalf;
             }
             float DistFromCorner = (ShoulderWidth * 0.35f);
@@ -6218,12 +6220,18 @@ namespace GSD.Roads
             MeshFilter MF = tObj.GetComponent<MeshFilter>();
             Mesh tMesh = MF.sharedMesh;
             Vector3[] tVerts = tMesh.vertices;
-            Vector3 StartVec = tVerts[520];
-            Vector3 EndVec = tVerts[521];
+
+            float LightHeadZ = 6f;
+            if (tallerPole)
+                LightHeadZ = 7.1f;
+            Vector3 StartVec = new Vector3(0f, 0.5f, LightHeadZ);
+            Vector3 EndVec = new Vector3(0f, tMesh.bounds.extents.y * 2, LightHeadZ);
+
+            
             StartVec = (((EndVec - StartVec) * (DistFromCorner / TLDistance)) + StartVec);
             Vector3 tempR_Start = tVerts[399];
             Vector3 tempR_End = tVerts[396];
-            Vector3 tLanePosR = ((tempR_End - tempR_Start) * 0.95f) + tempR_Start;
+            Vector3 tLanePosR = StartVec - new Vector3(0f, 1.6f, 0.5f);
             tLanePosR.z -= 1f;
 
             float SmallerDist = Vector3.Distance(StartVec, EndVec);
