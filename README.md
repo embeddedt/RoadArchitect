@@ -1,4 +1,8 @@
 # RoadArchitect
+
+## IMPORTANT: This project is no longer maintained. I recommend using [FritzsHero's fork](https://github.com/FritzsHero/RoadArchitect) instead.
+
+
 [![GitHub release](https://img.shields.io/github/release/FritzsHero/RoadArchitect.svg)]()
 [![Github All Releases](https://img.shields.io/github/downloads/FritzsHero/RoadArchitect/total.svg)]()
 [![GitHub contributors](https://img.shields.io/github/contributors/FritzsHero/RoadArchitect.svg)]()
